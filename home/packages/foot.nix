@@ -11,7 +11,6 @@
         letter-spacing = "0";
         dpi-aware = "no";
         initial-window-size-pixels = "1100x700";
-        include = "/usr/share/foot/themes/catppuccin-macchiato";
       };
 
       scrollback = {

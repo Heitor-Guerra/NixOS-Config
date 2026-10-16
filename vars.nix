@@ -8,9 +8,9 @@
   grubDevice = "nodev";
 
   # Kernel Config
-  # Options: pkgs.linuxPackages_lts, pkgs.linuxPackages_latest,
+  # Options: pkgs.linuxPackages, pkgs.linuxPackages_latest,
   # pkgs.linuxPackages, or another compatible kernel package set.
-  kernelPackages = pkgs.linuxPackages_lts;
+  kernelPackages = pkgs.linuxPackages;
   kernelParams = [
     "quiet"
     "loglevel=3"
@@ -64,8 +64,30 @@
   desktopEnvironment = "plasma6";
   displayManager = "sddm";
   excludedPackages = with pkgs.kdePackages; [
+    plasma-browser-integration
+    kcalc
+    ktnef
+    merkuro
+    kcharselect
+    ksystemlog
+    isoimagewriter
+    partitionmanager
+    kolourpaint
+    kcolorchooser
+    kontact
+    kmail
+    ark
     elisa
     kdepim-runtime
+    dolphin
+    discover
+    kate
+    qrca
+    kwrited
+    kwalletmanager
+    kwallet
+    gwenview
+    okular
     konsole
     kmahjongg
     kmines

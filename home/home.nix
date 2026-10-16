@@ -5,7 +5,6 @@
   imports = [
     ./packages/yazi.nix
     ./packages/foot.nix
-    ./packages/plasma.nix
     ./packages/gram.nix
     ./packages/zsh.nix
     ./packages/git.nix

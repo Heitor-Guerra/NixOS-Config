@@ -23,9 +23,7 @@
     };
   };
 
-  services.journald.extraConfig = ''
-    SystemMaxUse=${vars.journalMaxUse}
-  '';
+  services.journald.settings.Journal.SystemMaxUse = vars.journalMaxUse;
 
   programs.nix-ld.enable = true;
 }

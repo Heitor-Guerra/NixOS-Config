@@ -4,6 +4,7 @@
   hardware.enableRedistributableFirmware = true;
   hardware.enableAllHardware = true;
   hardware.graphics.enable = true;
+  hardware.bluetooth.enable = true;
 
   services.xserver.videoDrivers = [ vars.gpuDriver ];
 

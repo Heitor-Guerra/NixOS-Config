@@ -30,7 +30,7 @@
       };
 
       search.button = false;
-      tab_size = 4;
+      tab_size = 2;
       smooth_scroll.enabled = true;
       autosave = "on_window_change";
       ui_font_weight = 300.0;
