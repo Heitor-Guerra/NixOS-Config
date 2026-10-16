@@ -6,10 +6,10 @@
 
     settings = {
       node = {
-        ignore_system_version = false;
-        allow_prettier_download = false;
-        allow_npm_install = false;
-        allow_binary_download = false;
+        ignore_system_version = true;
+        allow_prettier_download = true;
+        allow_npm_install = true;
+        allow_binary_download = true;
       };
 
       tab_bar.show = true;
@@ -39,12 +39,54 @@
       restore_on_startup = "last_session";
       when_closing_with_no_tabs = "close_window";
 
-      lsp."lua-language-server" = {
-        binary = {
-          enable_auto_updates = true;
-          allow_binary_download = true;
+      lsp = {
+        "lua-language-server" = {
+          binary = {
+            enable_auto_updates = true;
+            allow_binary_download = true;
+          };
+          enable_lsp_tasks = true;
         };
-        enable_lsp_tasks = true;
+
+        "vtsls" = {
+          binary = {
+            enable_auto_updates = true;
+            allow_binary_download = true;
+          };
+          enable_lsp_tasks = true;
+        };
+
+        "eslint" = {
+          binary = {
+            enable_auto_updates = true;
+            allow_binary_download = true;
+          };
+          enable_lsp_tasks = true;
+        };
+
+        "tailwindcss-language-server" = {
+          binary = {
+            enable_auto_updates = true;
+            allow_binary_download = true;
+          };
+          enable_lsp_tasks = true;
+        };
+
+        "ruff" = {
+          binary = {
+            enable_auto_updates = true;
+            allow_binary_download = true;
+          };
+          enable_lsp_tasks = true;
+        };
+
+        "basedpyright" = {
+          binary = {
+            enable_auto_updates = true;
+            allow_binary_download = true;
+          };
+          enable_lsp_tasks = true;
+        };
       };
 
       project_panel = {
@@ -123,6 +165,21 @@
         label = "run lua file";
         command = "lua";
         args = [ "\${GRAM_FILE}" ];
+      }
+
+      {
+        label = "Python: Run";
+        command = "python3";
+        args = [ "$GRAM_FILE" ];
+      }
+    ];
+
+    debugger = [
+      {
+        label = "Python: Debug";
+        adapter = "Debugpy";
+        request = "launch";
+        program = "$GRAM_FILE";
       }
     ];
   };

@@ -50,10 +50,7 @@
     lua
     luarocks
     uv
-    gcc
     bun
-    jdk
-    maven
 
     # Btrfs and LVM management
     btrfs-progs
