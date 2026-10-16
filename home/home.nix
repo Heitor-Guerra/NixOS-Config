@@ -13,6 +13,14 @@
   # Basic packages you want available in your user environment globally
   home.packages = with pkgs; [
       nerd-fonts.jetbrains-mono
+
+      steam
+
+      eza
+      bat
+      fzf
+      zoxide
+
   ];
 
   # Let Home Manager manage itself and your profile

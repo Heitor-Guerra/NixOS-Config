@@ -1,18 +1,79 @@
-{ ... }:
+
+{ config, pkgs, ... }:
 
 {
   programs.zsh = {
     enable = true;
-    enableCompletion = true;
 
-    shellAliases = {
-      ls = "ls --color=auto";
-      grep = "grep --color=auto";
-      flatpak = "flatpak --user";
+    # Oh My Zsh
+    oh-my-zsh = {
+      enable = true;
+      theme = "agnoster";
 
-      syu = "sudo nixos-rebuild switch --upgrade";
-      install = "nix profile install";
-      uninstall = "nix profile remove";
+      plugins = [
+        "git"
+        "sudo"
+        "command-not-found"
+        "colored-man-pages"
+        "extract"
+        "docker"
+        "npm"
+      ];
     };
+
+    # Modern shell experience
+    enableCompletion = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+
+    # Useful aliases
+    shellAliases = {
+      ll = "ls -lah";
+      la = "ls -A";
+      c = "clear";
+      grep = "grep --color=auto";
+      rebuild = "sudo nixos-rebuild switch";
+      update = "nix flake update";
+    };
+
+    # Environment
+    history = {
+      size = 1000;
+      save = 1000;
+      share = true;
+      ignoreDups = true;
+      ignoreSpace = true;
+    };
+
+    # Custom initialization
+    initContent = ''
+      # Better navigation
+      setopt AUTO_CD
+      setopt INTERACTIVE_COMMENTS
+
+      # Colorful terminal
+      export CLICOLOR=1
+      export TERM="xterm-256color"
+
+      alias ls="eza --icons --group-directories-first"
+      alias tree="eza --tree --icons"
+
+      alias cat="bat"
+
+      # Welcome message
+      echo "✨ Welcome back, $(whoami)!"
+    '';
+  };
+
+  # Fuzzy finder
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
+  # Smart directory navigation
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
   };
 }
