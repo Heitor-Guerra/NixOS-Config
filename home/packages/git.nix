@@ -17,9 +17,6 @@
         pager = "more";
       };
 
-      url."ssh://git@github.com/".insteadOf = "https://github.com/";
-
-      alias.addall = "add .";
       pull.rebase = false;
     };
   };
