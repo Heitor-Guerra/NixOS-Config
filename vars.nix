@@ -111,6 +111,7 @@
   consoleKeymap = "br-abnt2";
   xkbLayout = "br";
   xkbVariant = "abnt2";
+  timezone = "America/Sao_Paulo"
 
   # User settings
   username = "heitor-guerra";
