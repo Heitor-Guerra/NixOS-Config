@@ -85,6 +85,7 @@
   username = "heitor-guerra";
   hostname = "computador-heitor";
   extraGroups = [
+    "wheel"
     "networkmanager"
   ];
   shell = "zsh";
