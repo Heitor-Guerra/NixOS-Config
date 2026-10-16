@@ -3,7 +3,12 @@
 {
   hardware.enableRedistributableFirmware = true;
   hardware.enableAllHardware = true;
-  hardware.graphics.enable = true;
+
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = vars.enableSteam;
+  };
+
   hardware.bluetooth.enable = true;
 
   services.xserver.videoDrivers = [ vars.gpuDriver ];

@@ -120,4 +120,5 @@
     "networkmanager"
   ];
   shell = "zsh";
+  enableSteam = false;
 }
