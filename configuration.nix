@@ -25,10 +25,7 @@
   nix.gc = {
       automatic = true;
       dates = "weekly";
-<<<<<<< HEAD
       options = "--delete-older-than 7d";
-=======
->>>>>>> cfc95108b867a9db82bc8ba7bafc58f7a927bb05
   };
   system.stateVersion = "26.05";
 }
