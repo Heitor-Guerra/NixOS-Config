@@ -1,0 +1,26 @@
+{ ... }:
+
+{
+  programs.git = {
+    enable = true;
+
+    settings = {
+      init.defaultBranch = "main";
+
+      user = {
+        email = "heitor.guerra@proton.me";
+        name = "Heitor Guerra";
+      };
+
+      core = {
+        editor = "nano";
+        pager = "more";
+      };
+
+      url."ssh://git@github.com/".insteadOf = "https://github.com/";
+
+      alias.addall = "add .";
+      pull.rebase = false;
+    };
+  };
+}
