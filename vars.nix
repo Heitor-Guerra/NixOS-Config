@@ -46,9 +46,18 @@
     yazi
     firefox
 
+    # Programming Tools
+    lua
+    luarocks
+    uv
+    gcc
+    bun
+    jdk
+    maven
+
     # Btrfs and LVM management
     btrfs-progs
-    lvm2
+    # lvm2
   ];
 
   # Services
