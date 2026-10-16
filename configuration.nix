@@ -17,5 +17,14 @@
     ./modules/storage.nix
   ];
 
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.optimise = {
+      automatic = true;
+      dates = "weekly";
+  };
+  nix.gc = {
+      automatic = true;
+      dates = "weekly";
+  };
   system.stateVersion = "26.05";
 }
