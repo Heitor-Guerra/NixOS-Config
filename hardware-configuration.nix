@@ -1,26 +1,26 @@
-{ ... }:
+{ vars, ... }:
 
 {
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/REPLACE-WITH-BTRFS-UUID";
-    fsType = "btrfs";
+    fsType = vars.fs;
     options = [ "subvol=@" "compress=zstd" ];
   };
 
   fileSystems."/home" = {
     device = "/dev/disk/by-uuid/REPLACE-WITH-BTRFS-UUID";
-    fsType = "btrfs";
+    fsType = vars.fs;
     options = [ "subvol=@home" "compress=zstd" ];
   };
 
   fileSystems."/nix" = {
     device = "/dev/disk/by-uuid/REPLACE-WITH-BTRFS-UUID";
-    fsType = "btrfs";
+    fsType = vars.fs;
     options = [ "subvol=@nix" "compress=zstd" ];
   };
 
   fileSystems."/var/log" = {
-    device = "/dev/disk/by-uuid/REPLACE-WITH-BTRFS-UUID";
+      fsType = vars.fs;
     fsType = "btrfs";
     options = [ "subvol=@log" "compress=zstd" ];
   };
