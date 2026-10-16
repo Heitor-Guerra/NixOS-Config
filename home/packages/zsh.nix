@@ -17,7 +17,10 @@
         "colored-man-pages"
         "extract"
         "docker"
-        "npm"
+        "bun"
+        "foot"
+        "mvn"
+        "uv"
       ];
     };
 
@@ -32,7 +35,7 @@
       la = "ls -A";
       c = "clear";
       grep = "grep --color=auto";
-      rebuild = "sudo nixos-rebuild switch";
+      rebuild = "sudo nixos-rebuild switch --flake /etc/nixos";
       update = "nix flake update";
     };
 
