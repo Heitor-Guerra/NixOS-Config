@@ -50,7 +50,6 @@
     lua
     luarocks
     uv
-    bun
 
     # Btrfs and LVM management
     btrfs-progs
