@@ -21,7 +21,16 @@
       # Change accordingly
       system = "x86_64-linux";
 
-      pkgs = import nixpkgs { inherit system; };
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfreePredicate =
+          pkg:
+          vars.gpuDriver == "nvidia"
+          && builtins.elem (nixpkgs.lib.getName pkg) [
+            "nvidia-kernel-modules"
+            "nvidia-x11"
+          ];
+      };
       vars = import ./vars.nix { inherit pkgs; };
     in
     {
