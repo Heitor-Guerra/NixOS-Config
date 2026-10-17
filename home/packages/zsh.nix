@@ -50,6 +50,10 @@
       setopt AUTO_CD
       setopt INTERACTIVE_COMMENTS
 
+      # Hide dotfiles and underscore-prefixed entries from completion
+      zstyle ':completion:*' ignored-patterns '_*'
+
+
       # Colorful terminal
       export CLICOLOR=1
       export TERM="xterm-256color"
