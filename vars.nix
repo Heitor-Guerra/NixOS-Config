@@ -27,11 +27,7 @@
 
   # Storage Config
   fs = "btrfs";
-  # Logical Volume Manager
   enableLvm = false;
-  lvmKernelModules = [
-    "dm_mod"
-  ];
   enableEncrypt = false;
   luksPartitionUuid = "PLACEHOLDER";
 
@@ -47,7 +43,6 @@
 
     # Btrfs and LVM management
     btrfs-progs
-    # lvm2
   ];
 
   # Services
