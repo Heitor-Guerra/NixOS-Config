@@ -39,7 +39,6 @@
   systemPackages = with pkgs; [
     _7zz
     gram
-    nano
     foot
     git
     htop
@@ -49,7 +48,6 @@
     # Programming Tools
     lua
     luarocks
-    uv
 
     # Btrfs and LVM management
     btrfs-progs

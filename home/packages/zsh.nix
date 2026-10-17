@@ -17,10 +17,7 @@
         "colored-man-pages"
         "extract"
         "docker"
-        "bun"
         "foot"
-        "mvn"
-        "uv"
       ];
     };
 
@@ -66,17 +63,5 @@
       # Welcome message
       echo "✨ Welcome back, $(whoami)!"
     '';
-  };
-
-  # Fuzzy finder
-  programs.fzf = {
-    enable = true;
-    enableZshIntegration = true;
-  };
-
-  # Smart directory navigation
-  programs.zoxide = {
-    enable = true;
-    enableZshIntegration = true;
   };
 }

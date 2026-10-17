@@ -47,46 +47,6 @@
           };
           enable_lsp_tasks = true;
         };
-
-        "vtsls" = {
-          binary = {
-            enable_auto_updates = true;
-            allow_binary_download = true;
-          };
-          enable_lsp_tasks = true;
-        };
-
-        "eslint" = {
-          binary = {
-            enable_auto_updates = true;
-            allow_binary_download = true;
-          };
-          enable_lsp_tasks = true;
-        };
-
-        "tailwindcss-language-server" = {
-          binary = {
-            enable_auto_updates = true;
-            allow_binary_download = true;
-          };
-          enable_lsp_tasks = true;
-        };
-
-        "ruff" = {
-          binary = {
-            enable_auto_updates = true;
-            allow_binary_download = true;
-          };
-          enable_lsp_tasks = true;
-        };
-
-        "basedpyright" = {
-          binary = {
-            enable_auto_updates = true;
-            allow_binary_download = true;
-          };
-          enable_lsp_tasks = true;
-        };
       };
 
       project_panel = {
@@ -166,21 +126,8 @@
         command = "lua";
         args = [ "\${GRAM_FILE}" ];
       }
-
-      {
-        label = "Python: Run";
-        command = "python3";
-        args = [ "$GRAM_FILE" ];
-      }
     ];
 
-    debugger = [
-      {
-        label = "Python: Debug";
-        adapter = "Debugpy";
-        request = "launch";
-        program = "$GRAM_FILE";
-      }
-    ];
+    debugger = [    ];
   };
 }

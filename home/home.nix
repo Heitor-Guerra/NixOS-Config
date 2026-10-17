@@ -16,9 +16,6 @@
 
       eza
       bat
-      fzf
-      zoxide
-
   ];
 
   # Let Home Manager manage itself and your profile
