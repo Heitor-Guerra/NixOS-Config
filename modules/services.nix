@@ -24,6 +24,4 @@
   };
 
   services.journald.settings.Journal.SystemMaxUse = vars.journalMaxUse;
-
-  programs.nix-ld.enable = true;
 }

@@ -21,18 +21,13 @@
       # Change accordingly
       system = "x86_64-linux";
 
-      pkgs = import nixpkgs {
-        inherit system;
-        config = {
-          allowUnfree = true;
-        };
-      };
+      pkgs = import nixpkgs { inherit system; };
       vars = import ./vars.nix { inherit pkgs; };
     in
     {
       nixosConfigurations.${vars.hostname} = nixpkgs.lib.nixosSystem {
         inherit system;
-        pkgs = pkgs;
+        inherit pkgs;
         specialArgs = { inherit vars; };
         modules = [
           ./configuration.nix
