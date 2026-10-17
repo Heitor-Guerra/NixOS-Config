@@ -18,8 +18,8 @@
       setSocketVariable = true;
     };
     autoPrune = {
-        enable = vars.dockerAutoPrune;
-        allVolumes.enable = vars.dockerAutoPrune;
+      enable = vars.dockerAutoPrune;
+      allVolumes.enable = vars.dockerAutoPrune;
     };
   };
 

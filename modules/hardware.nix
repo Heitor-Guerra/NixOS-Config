@@ -13,7 +13,7 @@
 
   services.xserver.videoDrivers = [ vars.gpuDriver ];
 
-  hardware.nvidia =  lib.mkIf (vars.gpuDriver == "nvidia") {
+  hardware.nvidia = lib.mkIf (vars.gpuDriver == "nvidia") {
     modesetting.enable = true;
     open = false;
     nvidiaSettings = true;

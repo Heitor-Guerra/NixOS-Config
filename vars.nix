@@ -45,10 +45,6 @@
     yazi
     firefox
 
-    # Programming Tools
-    lua
-    luarocks
-
     # Btrfs and LVM management
     btrfs-progs
     # lvm2
@@ -105,7 +101,7 @@
   consoleKeymap = "br-abnt2";
   xkbLayout = "br";
   xkbVariant = "abnt2";
-  timezone = "America/Sao_Paulo"
+  timezone = "America/Sao_Paulo";
 
   # User settings
   username = "heitor-guerra";

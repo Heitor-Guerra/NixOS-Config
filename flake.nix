@@ -10,22 +10,27 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs:
-  let
-    # Change accordingly
-    system = "x86_64-linux";
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      ...
+    }@inputs:
+    let
+      # Change accordingly
+      system = "x86_64-linux";
 
-    pkgs = import nixpkgs {
-      inherit system;
-      config = {
-        allowUnfree = true;
+      pkgs = import nixpkgs {
+        inherit system;
+        config = {
+          allowUnfree = true;
+        };
       };
-    };
-    vars = import ./vars.nix { inherit pkgs; };
-  in
-  {
-    nixosConfigurations.${vars.hostname} =
-      nixpkgs.lib.nixosSystem {
+      vars = import ./vars.nix { inherit pkgs; };
+    in
+    {
+      nixosConfigurations.${vars.hostname} = nixpkgs.lib.nixosSystem {
         inherit system;
         pkgs = pkgs;
         specialArgs = { inherit vars; };
@@ -41,14 +46,14 @@
 
             home-manager.extraSpecialArgs = { inherit vars; };
             home-manager.users.${vars.username} = {
-               imports = [ ./home/home.nix ];
+              imports = [ ./home/home.nix ];
 
-               home.username = vars.username;
-               home.homeDirectory = "/home/${vars.username}";
-               home.stateVersion = "26.05";
-             };
+              home.username = vars.username;
+              home.homeDirectory = "/home/${vars.username}";
+              home.stateVersion = "26.05";
+            };
           }
         ];
       };
-  };
+    };
 }

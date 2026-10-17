@@ -2,8 +2,8 @@
 
 {
   boot.loader.${vars.bootloader} = {
-      enable = true;
-      configurationLimit = 5;
+    enable = true;
+    configurationLimit = 5;
   };
 
   boot.loader.grub = lib.mkIf (vars.bootloader == "grub") {

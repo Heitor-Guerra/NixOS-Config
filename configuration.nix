@@ -17,15 +17,18 @@
     ./modules/storage.nix
   ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   nix.optimise = {
-      automatic = true;
-      dates = "weekly";
+    automatic = true;
+    dates = "weekly";
   };
   nix.gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 7d";
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
   };
   system.stateVersion = "26.05";
 }

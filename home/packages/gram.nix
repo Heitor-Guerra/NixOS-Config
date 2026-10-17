@@ -1,5 +1,32 @@
-{ ... }:
+{ pkgs, ... }:
 
+let
+  vars = import ../profile-vars.nix { inherit pkgs; };
+  languages = vars.languages;
+
+  languageServers = builtins.listToAttrs (
+    builtins.map (language: {
+      name = language.lsp;
+      value = {
+        binary = {
+          enable_auto_updates = true;
+          allow_binary_download = true;
+          arguments = language.arguments or [ ];
+        };
+        settings = language.settings or { };
+        enable_lsp_tasks = true;
+      };
+    }) (builtins.filter (language: language ? lsp) (builtins.attrValues languages))
+  );
+
+  tasks = builtins.concatLists (
+    builtins.map (language: language.tasks or [ ]) (builtins.attrValues languages)
+  );
+
+  debugger = builtins.concatLists (
+    builtins.map (language: language.debugger or [ ]) (builtins.attrValues languages)
+  );
+in
 {
   programs.gram = {
     enable = true;
@@ -39,15 +66,7 @@
       restore_on_startup = "last_session";
       when_closing_with_no_tabs = "close_window";
 
-      lsp = {
-        "lua-language-server" = {
-          binary = {
-            enable_auto_updates = true;
-            allow_binary_download = true;
-          };
-          enable_lsp_tasks = true;
-        };
-      };
+      lsp = languageServers;
 
       project_panel = {
         hide_hidden = true;
@@ -120,14 +139,8 @@
       }
     ];
 
-    tasks = [
-      {
-        label = "run lua file";
-        command = "lua";
-        args = [ "\${GRAM_FILE}" ];
-      }
-    ];
+    tasks = tasks;
 
-    debugger = [    ];
+    debugger = debugger;
   };
 }
