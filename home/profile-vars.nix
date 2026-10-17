@@ -21,7 +21,7 @@
       ];
 
       lsp = "lua-language-server";
-      task = [
+      tasks = [
         {
           label = "run lua file";
           command = "lua";
