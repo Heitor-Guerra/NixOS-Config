@@ -8,7 +8,7 @@
 
   boot.loader.grub = lib.mkIf (vars.bootloader == "grub") {
     efiSupport = true;
-    device = vars.grubDevice;
+    device = "nodev";
   };
 
   boot.loader.efi.canTouchEfiVariables = true;

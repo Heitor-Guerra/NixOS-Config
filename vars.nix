@@ -4,8 +4,6 @@
   # Bootloader configs
   # Options: "systemd-boot", "grub", "refind"
   bootloader = "systemd-boot";
-  # Used only by GRUB for UEFI installations.
-  grubDevice = "nodev";
 
   # Kernel Config
   # Options: pkgs.linuxPackages, pkgs.linuxPackages_latest,
@@ -21,9 +19,7 @@
 
   # Hardware settings
   gpuDriver = "nvidia";
-
-  # Security configs
-  enableSudo = true;
+  enable32Bit = false;
 
   # Storage Config
   fs = "btrfs";
@@ -106,5 +102,4 @@
     "networkmanager"
   ];
   shell = "zsh";
-  enableSteam = false;
 }
