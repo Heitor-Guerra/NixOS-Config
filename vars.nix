@@ -30,14 +30,10 @@
   # Packages Config
   systemPackages = with pkgs; [
     _7zz
-    gram
-    foot
-    git
     htop
-    yazi
     firefox
 
-    # Btrfs and LVM management
+    # Btrfs
     btrfs-progs
   ];
 
@@ -54,37 +50,8 @@
   desktopEnvironment = "plasma6";
   displayManager = "sddm";
   excludedPackages = with pkgs.kdePackages; [
-    plasma-browser-integration
-    kcalc
-    ktnef
-    merkuro
-    kcharselect
-    ksystemlog
-    isoimagewriter
-    partitionmanager
-    kolourpaint
-    kcolorchooser
-    kontact
-    kmail
-    ark
-    elisa
-    kdepim-runtime
-    dolphin
+    # Any package that you don't want, for exemple:
     discover
-    kate
-    qrca
-    kwrited
-    kwalletmanager
-    kwallet
-    gwenview
-    okular
-    konsole
-    kmahjongg
-    kmines
-    konversation
-    kpat
-    ksudoku
-    ktorrent
   ];
 
   # Locale and keymap
