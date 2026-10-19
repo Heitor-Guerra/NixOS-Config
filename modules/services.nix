@@ -11,10 +11,10 @@
   services.fstrim.enable = vars.enableFstrim;
 
   virtualisation.docker = {
-    enable = vars.enableDocker;
-    enableOnBoot = true;
+    enable = false;
+    enableOnBoot = false;
     rootless = {
-      enable = true;
+      enable = vars.enableDocker;
       setSocketVariable = true;
     };
     autoPrune = {

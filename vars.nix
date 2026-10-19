@@ -14,7 +14,6 @@
     "loglevel=3"
     "systemd.show_status=auto"
     "rd.udev.log_level=3"
-    "libahci.ignore_sss=1"
   ];
 
   # Hardware settings
