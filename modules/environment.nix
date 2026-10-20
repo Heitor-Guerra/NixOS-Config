@@ -33,10 +33,7 @@ in
 
   services.xserver.windowManager = lib.optionalAttrs isX11WM { ${vars.desktop}.enable = true; };
 
-  services.displayManager.${vars.displayManager} = {
-    enable = true;
-    wayland.enable = isWaylandWM || isDE;
-  };
+  services.displayManager.${vars.displayManager}.enable = true;
 
   environment = lib.optionalAttrs isDE {
     ${vars.desktop}.excludePackages = vars.excludedPackages;

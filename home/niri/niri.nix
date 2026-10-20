@@ -117,6 +117,14 @@
         Mod+Shift+Up { move-window-up; }
         Mod+Shift+Right { move-column-right; }
 
+        // Focus monitors
+        Mod+Ctrl+Left { focus-monitor-left; }
+        Mod+Ctrl+Right { focus-monitor-right; }
+
+        // Move columns between monitors
+        Mod+Ctrl+Shift+Left { move-column-to-monitor-left; }
+        Mod+Ctrl+Shift+Right { move-column-to-monitor-right; }
+
         // Resize columns
         Mod+R { switch-preset-column-width; }
         Mod+Shift+R { switch-preset-window-height; }

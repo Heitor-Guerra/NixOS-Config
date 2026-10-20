@@ -106,19 +106,19 @@
           lock = {
             action = "lock";
             enabled = true;
-            timeout = 300;
+            timeout = 120;
           };
 
           screen-off = {
             action = "screen_off";
             enabled = true;
-            timeout = 330;
+            timeout = 150;
           };
 
           suspend = {
             action = "suspend";
             enabled = true;
-            timeout = 600;
+            timeout = 300;
           };
         };
       };

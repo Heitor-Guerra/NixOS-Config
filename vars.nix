@@ -47,7 +47,8 @@
   # Environment Config
   # Options: "plasma6", "cosmic", "gnome", "budgie", "pantheon", "hyprland", "sway, "niri" etc...
   desktop = "niri";
-  displayManager = "sddm";
+  # Options: "sddm", "gdm", "cosmic-greeter", "lemurs", "dms-greeter", "noctalia-greeter" etc...
+  displayManager = "noctalia-greeter";
   excludedPackages = [
     # Only applies if a DE is active.
     # Any package that you don't want, for exemple:
