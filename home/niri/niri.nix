@@ -2,22 +2,17 @@
 
 {
   imports = [
-    ./fuzzel.nix
-    ./swaylock.nix
-    ./swayidle.nix
     ./udiskie.nix
     ./noctalia.nix
   ];
 
   home.packages = with pkgs; [
-    swaybg
     xwayland-satellite
     playerctl
     brightnessctl
     wl-clipboard
     libnotify
     pavucontrol
-    papirus-icon-theme
   ];
 
   services.polkit-gnome.enable = true;
@@ -41,7 +36,6 @@
 
     spawn-at-startup "noctalia"
     spawn-at-startup "udiskie" "--tray"
-    spawn-at-startup "swaybg" "-i" "/home/heitor-guerra/Pictures/Imagens/Tela_Padrao.jpg" "-m" "fill"
 
     input {
         keyboard {
@@ -99,7 +93,8 @@
     binds {
         // Applications
         Mod+Return { spawn "foot"; }
-        Mod+D { spawn "fuzzel"; }
+
+        Mod+D { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
         Mod+E { spawn "foot" "yazi"; }
         Mod+B { spawn "firefox"; }
         Mod+V { spawn "pavucontrol"; }
@@ -172,7 +167,7 @@
         XF86MonBrightnessDown { spawn "brightnessctl" "set" "5%-"; }
 
         // Session
-        Mod+Alt+L { spawn "swaylock"; }
+        Mod+Alt+L { spawn "noctalia" "msg" "session" "lock"; }
         Mod+Shift+E { spawn "noctalia" "ipc" "call" "session" "toggle"; }
         Ctrl+Alt+Delete { spawn "noctalia" "ipc" "call" "session" "toggle"; }
     }
