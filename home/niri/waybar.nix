@@ -28,9 +28,12 @@
         "memory"
         "pulseaudio"
         "network"
+        "custom/wifi"
+        "custom/bluetooth"
         "battery"
         "clock"
         "tray"
+        "custom/power"
       ];
 
       "custom/launcher" = {
@@ -94,6 +97,27 @@
         format-ethernet = "󰈀 connected";
         format-disconnected = "󰤭 offline";
         tooltip = true;
+      };
+
+      "custom/wifi" = {
+        format = "󰤨";
+        tooltip = true;
+        tooltip-format = "Select Wi-Fi network";
+        on-click = "wifi-menu";
+      };
+
+      "custom/bluetooth" = {
+        format = "󰂯";
+        tooltip = true;
+        tooltip-format = "Bluetooth devices";
+        on-click = "bluetooth-menu";
+      };
+
+      "custom/power" = {
+        format = "";
+        tooltip = true;
+        tooltip-format = "Power menu";
+        on-click = "power-menu";
       };
 
       battery = {
@@ -189,7 +213,8 @@
       }
 
       #cpu, #memory, #pulseaudio, #network,
-      #battery, #clock, #tray {
+      #battery, #clock, #tray
+      #custom-wifi, #custom-bluetooth, #custom-power {
         padding: 0 10px;
         margin: 5px 2px;
         background: #313244;
@@ -201,8 +226,12 @@
       #pulseaudio { color: #94e2d5; }
       #network { color: #89dceb; }
       #battery { color: #a6e3a1; }
-      #clock {
-        color: #f5c2e7;
+      #custom-wifi { color: #89dceb; }
+      #custom-bluetooth { color: #89b4fa; }
+      #clock { color: #f5c2e7; }
+
+      #custom-power {
+        color: #f38ba8;
         margin-right: 4px;
       }
 

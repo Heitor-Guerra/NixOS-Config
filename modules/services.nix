@@ -8,6 +8,7 @@
       PasswordAuthentication = false;
     };
   };
+  services.blueman.enable = true;
   services.fstrim.enable = vars.enableFstrim;
 
   virtualisation.docker = {
