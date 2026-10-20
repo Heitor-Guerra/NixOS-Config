@@ -94,13 +94,7 @@
       };
 
       idle = {
-        behavior_order = [
-          "lock"
-          "screen-off"
-          "suspend"
-        ];
-
-        pre_action_fade_seconds = 2.0;
+        pre_action_fade_seconds = 1.0;
 
         behavior = {
           lock = {
