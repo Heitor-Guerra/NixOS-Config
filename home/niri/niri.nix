@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ./udiskie.nix
     ./noctalia.nix
   ];
 
