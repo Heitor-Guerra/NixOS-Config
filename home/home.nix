@@ -16,6 +16,7 @@ in
     ./packages/gram.nix
     ./packages/zsh.nix
     ./packages/git.nix
+    ./niri/niri.nix
   ];
 
   # Basic packages you want available in your user environment globally
@@ -24,6 +25,7 @@ in
     [
       nerd-fonts.jetbrains-mono
 
+      fzf
       eza
       bat
     ]

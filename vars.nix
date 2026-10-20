@@ -45,12 +45,13 @@
   dockerAutoPrune = true;
 
   # Environment Config
-  # Options: "plasma6", "cosmic", "gnome"
-  desktopEnvironment = "plasma6";
+  # Options: "plasma6", "cosmic", "gnome", "budgie", "pantheon", "hyprland", "sway, "niri" etc...
+  desktop = "niri";
   displayManager = "sddm";
-  excludedPackages = with pkgs.kdePackages; [
+  excludedPackages = [
+    # Only applies if a DE is active.
     # Any package that you don't want, for exemple:
-    discover
+    # pkgs.kdePackages.discover
   ];
 
   # Locale and keymap
