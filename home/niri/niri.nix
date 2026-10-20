@@ -1,97 +1,12 @@
 { pkgs, ... }:
 
-let
-  power-menu = pkgs.writeShellScriptBin "power-menu" ''
-    set -euo pipefail
-
-    choice=$(
-      printf '%s\n' \
-        '  Lock' \
-        '󰒲  Suspend' \
-        '󰜉  Reboot' \
-        '  Power off' |
-        ${pkgs.fuzzel}/bin/fuzzel --dmenu --prompt='Power > '
-    ) || exit 0
-
-    case "$choice" in
-      *Lock)
-        exec ${pkgs.swaylock}/bin/swaylock
-        ;;
-      *Suspend)
-        exec ${pkgs.systemd}/bin/systemctl suspend
-        ;;
-      *Reboot|*Reboot*)
-        confirm=$(
-          printf '%s\n' 'Cancel' 'Confirm reboot' |
-            ${pkgs.fuzzel}/bin/fuzzel --dmenu --prompt='Reboot? > '
-        ) || exit 0
-        [ "$confirm" = 'Confirm reboot' ] &&
-          exec ${pkgs.systemd}/bin/systemctl reboot
-        ;;
-      *"Power off")
-        confirm=$(
-          printf '%s\n' 'Cancel' 'Confirm power off' |
-            ${pkgs.fuzzel}/bin/fuzzel --dmenu --prompt='Power off? > '
-        ) || exit 0
-        [ "$confirm" = 'Confirm power off' ] &&
-          exec ${pkgs.systemd}/bin/systemctl poweroff
-        ;;
-    esac
-  '';
-
-  wifi-menu = pkgs.writeShellScriptBin "wifi-menu" ''
-    set -u
-
-    if ! ${pkgs.networkmanager}/bin/nmcli radio wifi | grep -q enabled; then
-      choice=$(
-        printf '%s\n' 'Enable Wi-Fi' 'Cancel' |
-          ${pkgs.fuzzel}/bin/fuzzel --dmenu --prompt='Wi-Fi > '
-      ) || exit 0
-
-      [ "$choice" = 'Enable Wi-Fi' ] || exit 0
-      ${pkgs.networkmanager}/bin/nmcli radio wifi on
-    fi
-
-    ${pkgs.networkmanager}/bin/nmcli device wifi rescan 2>/dev/null || true
-    sleep 1
-
-    ssid=$(
-      ${pkgs.networkmanager}/bin/nmcli -g SSID device wifi list |
-        sed '/^$/d' |
-        sort -u |
-        ${pkgs.fuzzel}/bin/fuzzel --dmenu --prompt='Wi-Fi > '
-    ) || exit 0
-
-    [ -n "$ssid" ] || exit 0
-
-    if ${pkgs.networkmanager}/bin/nmcli --wait 15 device wifi connect "$ssid"; then
-      exit 0
-    fi
-
-    password=$(
-      ${pkgs.fuzzel}/bin/fuzzel --password \
-        --dmenu --prompt="Password for $ssid > "
-    ) || exit 0
-
-    [ -n "$password" ] || exit 0
-
-    ${pkgs.networkmanager}/bin/nmcli --wait 30 \
-      device wifi connect "$ssid" password "$password"
-  '';
-
-  bluetooth-menu = pkgs.writeShellScriptBin "bluetooth-menu" ''
-    exec ${pkgs.blueman}/bin/blueman-manager
-  '';
-in
 {
   imports = [
     ./fuzzel.nix
     ./swaylock.nix
-    ./waybar.nix
-    ./mako.nix
     ./swayidle.nix
     ./udiskie.nix
-    # ./noctalia.nix
+    ./noctalia.nix
   ];
 
   home.packages = with pkgs; [
@@ -103,11 +18,6 @@ in
     libnotify
     pavucontrol
     papirus-icon-theme
-
-    # Applets
-    power-menu
-    wifi-menu
-    bluetooth-menu
   ];
 
   services.polkit-gnome.enable = true;
@@ -129,8 +39,7 @@ in
         hide-when-typing
     }
 
-    spawn-at-startup "waybar"
-    spawn-at-startup "mako"
+    spawn-at-startup "noctalia"
     spawn-at-startup "udiskie" "--tray"
     spawn-at-startup "swaybg" "-i" "/home/heitor-guerra/Pictures/Imagens/Tela_Padrao.jpg" "-m" "fill"
 
@@ -218,8 +127,6 @@ in
         Mod+Shift+R { switch-preset-window-height; }
         Mod+Minus { set-column-width "-5%"; }
         Mod+Equal { set-column-width "+5%"; }
-        Mod+Shift+Minus { set-window-height "-5%"; }
-        Mod+Shift+Equal { set-column-height "+5%"; }
 
         // Workspaces
         Mod+1 { focus-workspace 1; }
@@ -266,8 +173,8 @@ in
 
         // Session
         Mod+Alt+L { spawn "swaylock"; }
-        Mod+Shift+E { quit; }
-        Ctrl+Alt+Delete { quit; }
+        Mod+Shift+E { spawn "noctalia" "ipc" "call" "session" "toggle"; }
+        Ctrl+Alt+Delete { spawn "noctalia" "ipc" "call" "session" "toggle"; }
     }
   '';
 }

@@ -1,9 +1,8 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
   programs.waybar = {
     enable = true;
-    package = pkgs.waybar;
 
     settings.mainBar = {
       layer = "top";
@@ -24,12 +23,8 @@
       ];
 
       modules-right = [
-        "cpu"
-        "memory"
         "pulseaudio"
         "network"
-        "custom/wifi"
-        "custom/bluetooth"
         "battery"
         "clock"
         "tray"
@@ -63,18 +58,6 @@
         separate-outputs = true;
       };
 
-      cpu = {
-        interval = 5;
-        format = "󰍛 {usage}%";
-        tooltip = true;
-      };
-
-      memory = {
-        interval = 10;
-        format = "󰘚 {percentage}%";
-        tooltip = true;
-      };
-
       pulseaudio = {
         format = "{icon} {volume}%";
         format-muted = "󰝟 muted";
@@ -97,20 +80,6 @@
         format-ethernet = "󰈀 connected";
         format-disconnected = "󰤭 offline";
         tooltip = true;
-      };
-
-      "custom/wifi" = {
-        format = "󰤨";
-        tooltip = true;
-        tooltip-format = "Select Wi-Fi network";
-        on-click = "wifi-menu";
-      };
-
-      "custom/bluetooth" = {
-        format = "󰂯";
-        tooltip = true;
-        tooltip-format = "Bluetooth devices";
-        on-click = "bluetooth-menu";
       };
 
       "custom/power" = {
@@ -213,8 +182,7 @@
       }
 
       #cpu, #memory, #pulseaudio, #network,
-      #battery, #clock, #tray
-      #custom-wifi, #custom-bluetooth, #custom-power {
+      #battery, #clock, #tray, #custom-power {
         padding: 0 10px;
         margin: 5px 2px;
         background: #313244;
@@ -226,8 +194,6 @@
       #pulseaudio { color: #94e2d5; }
       #network { color: #89dceb; }
       #battery { color: #a6e3a1; }
-      #custom-wifi { color: #89dceb; }
-      #custom-bluetooth { color: #89b4fa; }
       #clock { color: #f5c2e7; }
 
       #custom-power {
