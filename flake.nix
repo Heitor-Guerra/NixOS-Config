@@ -96,5 +96,21 @@
           type = "app";
           program = "${runDisko}/bin/apply-disko";
         };
+
+      # Installer to Bootable Drive
+      nixosConfigurations.installer = nixpkgs.lib.nixosSystem {
+        inherit system;
+
+        specialArgs = {
+          inherit self vars;
+          diskoInstall = disko.packages.${system}.disko-install;
+        };
+
+        modules = [
+          ./installer/iso.nix
+        ];
+      };
+
+      packages.${system}.installer-iso = self.nixosConfigurations.installer.config.system.build.isoImage;
     };
 }
