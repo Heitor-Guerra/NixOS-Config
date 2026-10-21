@@ -8,6 +8,11 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -15,6 +20,7 @@
       self,
       nixpkgs,
       home-manager,
+      disko,
       ...
     }@inputs:
     let
@@ -23,22 +29,19 @@
 
       pkgs = import nixpkgs {
         inherit system;
-        config.allowUnfreePredicate =
-          pkg:
-          vars.gpuDriver == "nvidia"
-          && builtins.elem (nixpkgs.lib.getName pkg) [
-            "nvidia-kernel-modules"
-            "nvidia-x11"
-          ];
+        config.allowUnfree = true;
       };
       vars = import ./vars.nix { inherit pkgs; };
     in
     {
+      # Main NixOS Config
       nixosConfigurations.${vars.hostname} = nixpkgs.lib.nixosSystem {
         inherit system;
         inherit pkgs;
         specialArgs = { inherit vars; };
         modules = [
+          disko.nixosModules.disko
+          ./disko/disk.nix
           ./configuration.nix
 
           # Integrate Home-Manager as a NixOS module
@@ -59,5 +62,39 @@
           }
         ];
       };
+
+      # Disko's disk partitioning.
+      apps.${system}.disko =
+        let
+          runDisko = pkgs.writeShellApplication {
+            name = "apply-disko";
+
+            runtimeInputs = [
+              disko.packages.${system}.disko
+              pkgs.coreutils
+            ];
+
+            text = ''
+              echo "Disk layout for: ${vars.hostname}"
+              echo "Target device: ${vars.mainDevice}"
+              echo
+              echo "WARNING: Disko may erase data on the target disk."
+              read -r -p 'Type APPLY to continue: ' answer
+
+              if [[ "$answer" != "APPLY" ]]; then
+                echo "Cancelled."
+                exit 1
+              fi
+
+              exec disko \
+                --mode disko \
+                --flake "${self}#${vars.hostname}"
+            '';
+          };
+        in
+        {
+          type = "app";
+          program = "${runDisko}/bin/apply-disko";
+        };
     };
 }

@@ -1,6 +1,16 @@
 { pkgs, ... }:
 
 {
+  # Hardware settings
+  gpuDriver = "nvidia";
+  enable32Bit = false;
+
+  # Storage Config
+  fs = "btrfs";
+  mainDevice = "/dev/disk/by-id/REPLACE-ME"; # Needed if you want to use disk partitioning
+  enableLvm = false;
+  enableEncrypt = false;
+
   # Bootloader configs
   # Options: "systemd-boot", "grub", "refind"
   bootloader = "systemd-boot";
@@ -15,16 +25,6 @@
     "systemd.show_status=auto"
     "rd.udev.log_level=3"
   ];
-
-  # Hardware settings
-  gpuDriver = "nvidia";
-  enable32Bit = false;
-
-  # Storage Config
-  fs = "btrfs";
-  enableLvm = false;
-  enableEncrypt = false;
-  luksPartitionUuid = "PLACEHOLDER";
 
   # Packages Config
   systemPackages = with pkgs; [
