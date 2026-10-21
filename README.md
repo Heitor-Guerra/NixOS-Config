@@ -109,6 +109,12 @@ The installer environment is separate from the normal desktop configuration. Bui
 
 The installer is intended to provide the tools required to partition a target disk and install the flake configuration.
 
+After entering the live environment, simply run the following command to install this config:
+
+```sh
+sudo install-nixos
+```
+
 The installation workflow should:
 
   1.  Boot into the live installer.

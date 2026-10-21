@@ -41,7 +41,7 @@
         specialArgs = { inherit vars; };
         modules = [
           disko.nixosModules.disko
-          ./disko/disk.nix
+          ./diskPartitioning/disk.nix
           ./configuration.nix
 
           # Integrate Home-Manager as a NixOS module
@@ -100,6 +100,7 @@
       # Installer to Bootable Drive
       nixosConfigurations.installer = nixpkgs.lib.nixosSystem {
         inherit system;
+        inherit pkgs;
 
         specialArgs = {
           inherit self vars;
