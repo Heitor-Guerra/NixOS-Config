@@ -3,6 +3,7 @@
 {
   programs.${vars.shell}.enable = true;
 
+  users.mutableUsers = true;
   users.defaultUserShell = pkgs.${vars.shell};
   environment.localBinInPath = true;
   users.users.${vars.username} = {

@@ -31,6 +31,11 @@ in
     ]
     ++ languagePackages;
 
+  xdg.userDirs = {
+    enable = true;
+    createDirectories = true;
+  };
+
   # Let Home Manager manage itself and your profile
   programs.home-manager.enable = true;
 }
