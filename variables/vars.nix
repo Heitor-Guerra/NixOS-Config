@@ -1,13 +1,8 @@
 { pkgs, ... }:
 
 {
-  # Hardware settings
-  gpuDriver = "nvidia";
-  enable32Bit = false;
-
   # Storage Config
   fs = "btrfs";
-  mainDevice = "/dev/disk/by-id/REPLACE-ME"; # Needed if you want to use disk partitioning
   enableLvm = false;
   enableEncrypt = false;
 
@@ -25,6 +20,7 @@
     "systemd.show_status=auto"
     "rd.udev.log_level=3"
   ];
+  enable32Bit = false;
 
   # Packages Config
   systemPackages = with pkgs; [

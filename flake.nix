@@ -24,14 +24,16 @@
       ...
     }@inputs:
     let
+      hardwareInfo = import ./variables/hardware-info.nix;
       # Change accordingly
-      system = "x86_64-linux";
+      system = hardwareInfo.system or "x86_64-linux";
 
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
       };
-      vars = import ./vars.nix { inherit pkgs; };
+      vars =
+        (import ./variables/vars.nix { inherit pkgs; }) // (builtins.removeAttrs hardwareInfo [ "system" ]);
     in
     {
       # Main NixOS Config

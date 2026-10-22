@@ -2,8 +2,6 @@
 
 {
   imports = [
-    ./hardware-configuration.nix
-
     ./modules/bootloader.nix
     ./modules/kernel.nix
     ./modules/locale.nix

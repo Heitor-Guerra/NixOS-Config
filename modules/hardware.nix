@@ -18,4 +18,7 @@
     open = false;
     nvidiaSettings = false;
   };
+
+  hardware.cpu.intel.updateMicrocode = (vars.cpuVendor or "unknown") == "intel";
+  hardware.cpu.amd.updateMicrocode = (vars.cpuVendor or "unknown") == "amd";
 }
