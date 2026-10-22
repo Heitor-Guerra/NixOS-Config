@@ -15,6 +15,9 @@ let
       pkgs.coreutils
       pkgs.util-linux
       pkgs.gptfdisk
+      pkgs.gawk
+      pkgs.gnugrep
+      pkgs.systemd
     ];
 
     text = ''
@@ -43,8 +46,9 @@ let
 
       echo
       echo "Selected disk: $disk"
+      lsblk -o NAME,SIZE,TYPE,FSTYPE,MOUNTPOINTS "$disk"
       echo
-      echo "WARNING: Disko may erase ALL data on this disk."
+      echo "WARNING: ALL partitions and data on this disk will be erased."
       echo
 
       read -r -p "Type ERASE to continue: " confirmation
@@ -54,7 +58,58 @@ let
         exit 1
       fi
 
+      # Collect existing partitions on the selected disk.
+      mapfile -t partitions < <(
+        lsblk --list --noheadings --paths --output NAME,TYPE "$disk" |
+          awk '$2 == "part" { print $1 }'
+      )
+
+      # Unmount existing filesystems and disable swap on target partitions.
+      for part in "''${partitions[@]}"; do
+        if swapon --show=NAME --noheadings --raw |
+          grep --fixed-strings --line-regexp --quiet "$part"; then
+          echo "Disabling swap on $part..."
+          swapoff "$part"
+        fi
+
+        if findmnt --source "$part" --noheadings --output TARGET \
+          >/dev/null 2>&1; then
+          echo "Unmounting filesystems on $part..."
+          umount --all-targets -- "$part"
+        fi
+
+        # Never wipe a partition that still has mounted filesystems.
+        if lsblk --nodeps --noheadings --raw --output MOUNTPOINTS "$part" |
+          grep --quiet '[^[:space:]]'; then
+          echo "ERROR: $part still has mounted filesystems." >&2
+          echo "Refusing to erase the disk." >&2
+          lsblk -o NAME,SIZE,FSTYPE,MOUNTPOINTS "$disk" >&2
+          exit 1
+        fi
+      done
+
+      echo
+      echo "Removing old filesystem signatures..."
+
+      for part in "''${partitions[@]}"; do
+        wipefs --all "$part"
+      done
+
+      echo
+      echo "Removing the existing partition table..."
+      sgdisk --zap-all "$disk"
+
+      echo "Refreshing the kernel's partition information..."
+      blockdev --rereadpt "$disk"
+      udevadm settle
+
+      echo
+      echo "Old disk layout cleared."
+      echo "Starting Disko installation..."
+      echo
+
       exec ${diskoInstall}/bin/disko-install \
+        --mode format \
         --flake "/etc/nixos-config#${vars.hostname}" \
         --disk main "$disk"
     '';
