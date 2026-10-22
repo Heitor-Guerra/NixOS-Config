@@ -14,5 +14,4 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   boot.loader.timeout = 0;
-
 }

@@ -63,6 +63,8 @@
         ];
       };
 
+      #
+      #
       # Disko's disk partitioning.
       apps.${system}.disko =
         let
@@ -97,6 +99,8 @@
           program = "${runDisko}/bin/apply-disko";
         };
 
+      #
+      #
       # Installer to Bootable Drive
       nixosConfigurations.installer = nixpkgs.lib.nixosSystem {
         inherit system;

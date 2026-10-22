@@ -22,7 +22,6 @@ let
   isDE = builtins.elem vars.desktop knownDEs;
   isWaylandWM = builtins.elem vars.desktop knownWaylandWMs;
   isX11WM = builtins.elem vars.desktop knownX11WMs;
-  isWM = isWaylandWM || isX11WM;
 in
 {
   services.xserver.enable = true;
@@ -38,6 +37,4 @@ in
   environment = lib.optionalAttrs isDE {
     ${vars.desktop}.excludePackages = vars.excludedPackages;
   };
-
-  security.pam.services.swaylock = lib.mkIf isWM { };
 }

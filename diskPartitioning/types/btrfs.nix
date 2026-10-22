@@ -8,6 +8,11 @@
     extraArgs = [ "-f" ];
 
     subvolumes = {
+      "/root" = {
+        mountpoint = "/";
+        mountOptions = [ "compress=zstd" ];
+      };
+
       "/home" = {
         mountpoint = "/home";
         mountOptions = [ "compress=zstd" ];
