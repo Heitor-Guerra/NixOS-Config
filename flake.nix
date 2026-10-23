@@ -41,7 +41,7 @@
         specialArgs = { inherit vars; };
         modules = [
           disko.nixosModules.disko
-          ./diskPartitioning/disk.nix
+          ./disk-partitioning/disk.nix
           ./configuration.nix
 
           # Integrate Home-Manager as a NixOS module

@@ -33,7 +33,7 @@
 
       cursor = {
         xcursor-theme = "Adwaita";
-        xcursor-size = 18;
+        xcursor-size = 8;
         hide-when-typing = { };
       };
 
