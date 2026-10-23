@@ -1,70 +1,102 @@
 { ... }:
 
 {
-  programs.zsh = {
-    enable = true;
-
-    # Oh My Zsh
-    oh-my-zsh = {
+  programs = {
+    zsh = {
       enable = true;
-      theme = "agnoster";
 
-      plugins = [
-        "git"
-        "sudo"
-        "command-not-found"
-        "colored-man-pages"
-        "extract"
-        "docker"
-        "foot"
+      # Oh My Zsh
+      oh-my-zsh = {
+        enable = true;
+        theme = "agnoster";
+
+        plugins = [
+          "git"
+          "sudo"
+          "command-not-found"
+          "colored-man-pages"
+          "extract"
+          "docker"
+          "foot"
+        ];
+      };
+
+      # Modern shell experience
+      enableCompletion = true;
+      autosuggestion.enable = true;
+      syntaxHighlighting.enable = true;
+
+      # Useful aliases
+      shellAliases = {
+        # Navigation and file listing
+        c = "clear";
+        ls = "eza --icons --group-directories-first";
+        ll = "eza -lah --icons --group-directories-first";
+        la = "eza -a --icons --group-directories-first";
+        tree = "eza --tree --icons";
+        cat = "bat";
+
+        # Search
+        grep = "rg --color=auto";
+        f = "fd";
+
+        # System monitoring and disk usage
+        htop = "btop";
+        du = "dust";
+        df = "duf";
+
+        # NixOS workflows
+        rebuild = "sudo nixos-rebuild switch --flake /etc/nixos";
+        update = "nix flake update";
+      };
+
+      # Environment
+      history = {
+        size = 10000;
+        save = 10000;
+        share = true;
+        ignoreDups = true;
+        ignoreSpace = true;
+      };
+
+      # Custom initialization
+      initContent = ''
+        # Better navigation
+        setopt AUTO_CD
+        setopt INTERACTIVE_COMMENTS
+
+        # Hide dotfiles and underscore-prefixed entries from completion
+        zstyle ':completion:*' ignored-patterns '_*'
+
+        # Welcome message
+        echo "✨ Welcome back, $(whoami)!"
+      '';
+    };
+
+    # Fuzzy finder and shell keybindings
+    fzf = {
+      enable = true;
+      enableZshIntegration = true;
+      historyWidget.command = "";
+      defaultCommand = "fd --type f --hidden --follow --exclude .git";
+
+      defaultOptions = [
+        "--height=40%"
+        "--layout=reverse"
+        "--border"
       ];
     };
 
-    # Modern shell experience
-    enableCompletion = true;
-    autosuggestion.enable = true;
-    syntaxHighlighting.enable = true;
-
-    # Useful aliases
-    shellAliases = {
-      ll = "ls -lah";
-      la = "ls -A";
-      c = "clear";
-      grep = "grep --color=auto";
-      rebuild = "sudo nixos-rebuild switch --flake /etc/nixos";
-      update = "nix flake update";
+    # Smarter directory navigation
+    zoxide = {
+      enable = true;
+      enableZshIntegration = true;
     };
 
-    # Environment
-    history = {
-      size = 1000;
-      save = 1000;
-      share = true;
-      ignoreDups = true;
-      ignoreSpace = true;
+    # Searchable shell history
+    atuin = {
+      enable = true;
+      enableZshIntegration = true;
     };
-
-    # Custom initialization
-    initContent = ''
-      # Better navigation
-      setopt AUTO_CD
-      setopt INTERACTIVE_COMMENTS
-
-      # Hide dotfiles and underscore-prefixed entries from completion
-      zstyle ':completion:*' ignored-patterns '_*'
-
-
-      # Colorful terminal
-      export CLICOLOR=1
-      export TERM="xterm-256color"
-
-      alias ls="eza --icons --group-directories-first"
-      alias tree="eza --tree --icons"
-
-      alias cat="bat"
-
-      # Welcome message
-      echo "✨ Welcome back, $(whoami)!"
-    '';
   };
 }

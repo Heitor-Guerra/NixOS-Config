@@ -1,5 +1,3 @@
-{ pkgs, ... }:
-
 {
   # Storage Config
   fs = "btrfs";
@@ -11,9 +9,6 @@
   bootloader = "systemd-boot";
 
   # Kernel Config
-  # Options: pkgs.linuxPackages, pkgs.linuxPackages_latest,
-  # pkgs.linuxPackages, or another compatible kernel package set.
-  kernelPackages = pkgs.linuxPackages;
   kernelParams = [
     "quiet"
     "loglevel=3"
@@ -21,16 +16,6 @@
     "rd.udev.log_level=3"
   ];
   enable32Bit = false;
-
-  # Packages Config
-  systemPackages = with pkgs; [
-    _7zz
-    htop
-    firefox
-
-    # Btrfs
-    btrfs-progs
-  ];
 
   # Services
   enableOpenSSH = true;
@@ -45,11 +30,6 @@
   desktop = "niri";
   # Options: "sddm", "gdm", "cosmic-greeter", "lemurs", "dms-greeter", "noctalia-greeter" etc...
   displayManager = "noctalia-greeter";
-  excludedPackages = [
-    # Only applies if a DE is active.
-    # Any package that you don't want, for exemple:
-    # pkgs.kdePackages.discover
-  ];
 
   # Locale and keymap
   defaultLocale = "pt_BR.UTF-8";

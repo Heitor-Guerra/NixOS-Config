@@ -1,12 +1,18 @@
-{ modulesPath, vars, ... }:
+{
+  modulesPath,
+  pkgs,
+  vars,
+  ...
+}:
 
 {
-  boot.kernelPackages = vars.kernelPackages;
-  boot.kernelParams = vars.kernelParams;
-
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
+
+  boot.kernelPackages = pkgs.linuxPackages;
+
+  boot.kernelParams = vars.kernelParams;
 
   boot.initrd.availableKernelModules = [
     "nvme"

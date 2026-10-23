@@ -25,7 +25,7 @@
 
       opener.edit = [
         {
-          run = "nano -- %s";
+          run = "nvim -- %s";
           block = true;
         }
       ];

@@ -9,7 +9,6 @@
     ./modules/security.nix
     ./modules/environment.nix
     ./modules/hardware.nix
-    ./modules/default-packages.nix
     ./modules/services.nix
     ./modules/users.nix
     ./modules/storage.nix

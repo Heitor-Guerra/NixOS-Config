@@ -14,6 +14,7 @@ in
     ./packages/yazi.nix
     ./packages/foot.nix
     ./packages/gram.nix
+    ./packages/neovim.nix
     ./packages/zsh.nix
     ./packages/git.nix
     ./niri/niri.nix
@@ -25,7 +26,16 @@ in
     [
       nerd-fonts.jetbrains-mono
 
-      fzf
+      firefox
+      _7zz
+
+      fd
+      dust
+      duf
+      btop
+      fastfetch
+      difftastic
+      ripgrep
       eza
       bat
     ]

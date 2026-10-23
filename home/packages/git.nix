@@ -1,23 +1,39 @@
 { ... }:
 
 {
-  programs.git = {
-    enable = true;
+  programs = {
+    git = {
+      enable = true;
 
-    settings = {
-      init.defaultBranch = "main";
+      settings = {
+        init.defaultBranch = "main";
 
-      user = {
-        email = "heitor.guerra@proton.me";
-        name = "Heitor Guerra";
+        user = {
+          email = "heitor.guerra@proton.me";
+          name = "Heitor Guerra";
+        };
+
+        core = {
+          editor = "nvim";
+          pager = "less -FRX";
+        };
+
+        pull.rebase = false;
+        push.autoSetupRemote = true;
       };
+    };
 
-      core = {
-        editor = "nano";
-        pager = "more";
+    difftastic = {
+      enable = true;
+      git = {
+        enable = true;
+        mode = "both";
       };
-
-      pull.rebase = false;
+      options = {
+        color = "always";
+        sort-paths = true;
+        tab-width = 8;
+      };
     };
   };
 }
