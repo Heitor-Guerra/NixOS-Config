@@ -32,8 +32,8 @@
       hotkey-overlay.skip-at-startup = { };
 
       cursor = {
-        xcursor-theme = "Adwaita";
-        xcursor-size = 8;
+        xcursor-theme = "breeze_cursors";
+        xcursor-size = 24;
         hide-when-typing = { };
       };
 

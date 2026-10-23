@@ -25,7 +25,7 @@ in
     with pkgs;
     [
       nerd-fonts.jetbrains-mono
-
+      kdePackages.breeze
       firefox
       _7zz
 
