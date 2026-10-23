@@ -11,15 +11,14 @@ The repository is organized modularly to keep system definitions clean and maint
 - **`flake.nix`**: The main entry point. It pins Nixpkgs and Home Manager inputs, defines system architecture, imports `vars.nix`, and builds the NixOS configuration outputs.
 - **`configuration.nix`**: The orchestrator for modules, bringing together system-wide configurations and services.
 - **`hardware-configuration.nix`**: THIS FILE IS JUST FOR REFERENCE. It contains machine-specific hardware partitions, filesystem mount points, and device identifiers. Each machine will have a different configuration.
-- **`vars.nix`**: Contains global variables that automatically configure system parameters such as the hostname, username, bootloader, kernel, desktop environment, default packages, and locale.
+- **`variables/vars.nix`** — holds the reusable system settings, including hostname, username, filesystem, encryption and LVM options, bootloader, kernel, graphics driver, desktop environment, display manager, packages, services, locale, and keymap.
+- **`variables/hardware-info.nix`** — holds per-machine hardware details used by the flake, such as the Nix system architecture, CPU vendor, detected GPU vendor information and driver choice, and selected installation disk. The template can be empty in the repository; the installer writes the detected values into a writable copy before installing. **If using the system rebuild, instead of custom iso, please configure this.**
 - **`modules/`**: Contains dedicated configuration files for each specific aspect of the system (e.g., networking, storage, security, and services).
 - **`home/`**: Contains Home Manager user settings. `home/home.nix` .
   + **`home.nix`**: Acts as the user orchestrator for the dotfiles and user-level packages. 
   + **`packages/`**: Defines dotfiles for packages, using nix language.
   + **`niri/`**: Defines niri and Noctalia configuration.
-- **`disko/`**: Declarative disk partitioning and filesystem layouts.
-  + **`disk.nix`**: Defines the shared partition table and selects the appropriate root partition layout.
-  + **`types/`**: Contains filesystem variants, such as Btrfs, Btrfs with LUKS, ext4, and ext4 with LUKS.
+- **`disko/`**: Configuration for filesystem layouts and disk partitioning. Can .
 - **`installer/`**: Configuration for the live installer environment and its installation workflow
 
 ---
@@ -50,40 +49,14 @@ Important settings include:
 
   +  `hostname`: The hostname and name of your NixOS configuration.
   +  `username`: The user managed by the system and Home Manager.
-  +  `mainDevice`: The disk that Disko will partition.
   +  `fs`: The selected filesystem, such as btrfs or ext4.
   +  `enableEncrypt`: Whether the selected filesystem layout uses LUKS encryption.
   +  `enableLvm`: Whether LVM is enabled. Ensure the selected Disko layout actually implements LVM before enabling it.
-  +  `gpuDriver`: Hardware graphics configuration.
   +  `desktop` and `displayManager`: Your desktop environment and login manager.
 
 Make sure the selected filesystem, encryption, LVM, bootloader, and hardware settings are compatible.
 
-The mainDevice variable should preferably use a persistent device path, such as `/dev/disk/by-id/...`, rather than a device name that might change between boots.
-
 **Warning**: Disko can erase the target disk. Verify the device identifier before applying a layout. Back up any important data first.
-
----
-
-## Disk Partitioning with Disko
-
-Disko is integrated into the main NixOS configuration, but ordinary NixOS rebuilds do not automatically repartition or format the disk.
-
-The flake exposes a separate app named disko to apply the selected layout.
-
-Run it from the repository root:
-
-```sh
-sudo nix run .#disko
-```
-
-The app displays the configured hostname and target device, then asks you to type APPLY before proceeding.
-
-The layout is selected dynamically in `disko/disk.nix` based on the filesystem and encryption variables in vars.nix.
-
-LVM requires corresponding Disko layout definitions; setting `enableLvm = true` alone does not create an LVM layout.
-
-Disko's formatting and partitioning operations are destructive. Only run the app when you intend to create or recreate the selected disk layout.
 
 ---
 
