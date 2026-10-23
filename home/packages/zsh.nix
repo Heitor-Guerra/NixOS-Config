@@ -15,9 +15,11 @@
           "sudo"
           "command-not-found"
           "colored-man-pages"
+          "you-should-use"
           "extract"
           "docker"
           "foot"
+          "zoxide"
         ];
       };
 
