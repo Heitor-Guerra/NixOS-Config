@@ -16,8 +16,8 @@
 # }
 {
   system = "x86_64-linux";
-  cpuVendor = "unknown";
-  gpuVendors = [ ];
-  gpuDriver = "unknown";
-  mainDevice = "/dev/nvme0n1";
+  cpuVendor = "amd";
+  gpuVendors = [ "amd" ];
+  gpuDriver = "amdgpu";
+  mainDevice = "/dev/disk/by-id/nvme-SAMSUNG_MZAMX512HCLV-00BL2_M2025091002463@";
 }

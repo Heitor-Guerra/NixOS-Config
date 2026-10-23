@@ -11,6 +11,7 @@
   services.upower.enable = true;
   services.power-profiles-daemon.enable = true;
   services.fstrim.enable = vars.enableFstrim;
+  services.fwupd.enable = true;
 
   virtualisation.docker = {
     enable = false;
