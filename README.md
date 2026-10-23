@@ -10,7 +10,6 @@ The repository is organized modularly to keep system definitions clean and maint
 
 - **`flake.nix`**: The main entry point. It pins Nixpkgs and Home Manager inputs, defines system architecture, imports `vars.nix`, and builds the NixOS configuration outputs.
 - **`configuration.nix`**: The orchestrator for modules, bringing together system-wide configurations and services.
-- **`hardware-configuration.nix`**: THIS FILE IS JUST FOR REFERENCE. It contains machine-specific hardware partitions, filesystem mount points, and device identifiers. Each machine will have a different configuration.
 - **`variables/vars.nix`** — holds the reusable system settings, including hostname, username, filesystem, encryption and LVM options, bootloader, kernel, graphics driver, desktop environment, display manager, packages, services, locale, and keymap.
 - **`variables/hardware-info.nix`** — holds per-machine hardware details used by the flake, such as the Nix system architecture, CPU vendor, detected GPU vendor information and driver choice, and selected installation disk. The template can be empty in the repository; the installer writes the detected values into a writable copy before installing. **If using the system rebuild, instead of custom iso, please configure this.**
 - **`modules/`**: Contains dedicated configuration files for each specific aspect of the system (e.g., networking, storage, security, and services).
@@ -30,14 +29,6 @@ Install NixOS and make sure flakes are enabled. If they are not enabled in your 
 ```sh
 --extra-experimental-features "nix-command flakes"
 ```
-
-The flake currently targets:
-
-```sh
-system = "x86_64-linux";
-```
-
-Change this if you intend to build for another architecture.
 
 ---
 
