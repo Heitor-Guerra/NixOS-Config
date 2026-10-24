@@ -4,7 +4,7 @@
   programs = {
     zsh = {
       enable = true;
-  
+
       plugins = [
         {
           name = "you-should-use";
@@ -106,6 +106,22 @@
     atuin = {
       enable = true;
       enableZshIntegration = true;
+      settings = {
+        style = "compact";
+        inline_height = 15;
+        show_help = false;
+        show_preview = true;
+      };
+    };
+
+    btop = {
+      enable = true;
+
+      settings = {
+        update_ms = 1000;
+        color_theme = "dracula";
+        theme_background = false;
+      };
     };
   };
 }

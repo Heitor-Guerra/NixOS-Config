@@ -25,7 +25,7 @@
 
       opener.edit = [
         {
-          run = "nvim -- %s";
+          run = "hx -- %s";
           block = true;
         }
       ];

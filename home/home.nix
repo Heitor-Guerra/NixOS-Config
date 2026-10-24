@@ -11,10 +11,12 @@ in
 {
   # Import your individual modular program configs explicitly
   imports = [
-    ./packages/yazi.nix
+    ./packages/fastfetch.nix
     ./packages/foot.nix
     ./packages/gram.nix
+    ./packages/helix.nix
     ./packages/neovim.nix
+    ./packages/yazi.nix
     ./packages/zsh.nix
     ./packages/git.nix
     ./niri/niri.nix
@@ -32,12 +34,10 @@ in
       fd
       dust
       duf
-      btop
-      fastfetch
-      difftastic
       ripgrep
       eza
       bat
+      wl-clipboard
     ]
     ++ languagePackages;
 
