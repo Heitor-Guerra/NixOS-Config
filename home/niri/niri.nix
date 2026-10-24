@@ -19,10 +19,7 @@
   wayland.windowManager.niri = {
     enable = true;
 
-    extraConfig = ''
-      spawn-at-startup "noctalia"
-      spawn-at-startup "udiskie" "--tray"
-    '';
+    extraConfig = ''spawn-at-startup "noctalia"'';
 
     settings = {
       prefer-no-csd = { };
