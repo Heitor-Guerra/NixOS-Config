@@ -68,6 +68,7 @@
     # c = {
     #   packages = with pkgs; [
     #     clang
+    #     clang-tools
     #     cmake
     #   ];
 
