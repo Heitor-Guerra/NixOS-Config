@@ -12,10 +12,13 @@ let
   knownWaylandWMs = [
     "niri"
     "hyprland"
+    "river"
     "sway"
   ];
   knownX11WMs = [
     "i3"
+    "fluxbox"
+    "xmonad"
     "bspwm"
   ];
 
@@ -33,8 +36,4 @@ in
   services.xserver.windowManager = lib.optionalAttrs isX11WM { ${vars.desktop}.enable = true; };
 
   services.displayManager.${vars.displayManager}.enable = true;
-
-  environment = lib.optionalAttrs isDE {
-    ${vars.desktop}.excludePackages = vars.excludedPackages;
-  };
 }
