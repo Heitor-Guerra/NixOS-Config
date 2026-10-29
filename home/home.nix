@@ -15,7 +15,6 @@ in
     ./packages/foot.nix
     ./packages/gram.nix
     ./packages/helix.nix
-    ./packages/neovim.nix
     ./packages/yazi.nix
     ./packages/zsh.nix
     ./packages/git.nix
