@@ -6,7 +6,7 @@
 
   hardware.graphics = {
     enable = true;
-    enable32Bit = vars.enable32Bit;
+    enable32Bit = true;
   };
 
   hardware.bluetooth.enable = true;

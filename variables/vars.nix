@@ -15,7 +15,6 @@
     "systemd.show_status=auto"
     "rd.udev.log_level=3"
   ];
-  enable32Bit = false;
 
   # Services
   enableOpenSSH = true;

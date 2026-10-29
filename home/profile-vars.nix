@@ -21,13 +21,6 @@
       ];
 
       lsp = "lua-language-server";
-      tasks = [
-        {
-          label = "run lua file";
-          command = "lua";
-          args = [ "\${GRAM_FILE}" ];
-        }
-      ];
     };
 
     c = {
@@ -44,30 +37,25 @@
         "--background-index"
         "--clang-tidy"
       ];
-
-      tasks = [
-        {
-          label = "Compile C/C++ file";
-          command = "clang";
-          args = [
-            "-g"
-            "\${GRAM_FILE}"
-            "-o"
-            "\${GRAM_DIR}/program"
-          ];
-        }
-      ];
-
-      debugger = [
-        {
-          label = "Debug C program";
-          adapter = "CodeLLDB";
-          program = "$GRAM_WORKTREE_ROOT/program";
-          request = "launch";
-        }
-      ];
     };
 
+    
+    cpp = {
+      packages = with pkgs; [
+        clang
+        clang-tools
+        cmake
+      ];
+
+      lsp = "clangd";
+      # Possible to add arguments to call the lsp
+      arguments = [
+        "--query-driver=/etc/profiles/per-user/heitor-guerra/bin/clang++"
+        "--background-index"
+        "--clang-tidy"
+      ];
+    };
+    
     # python = {
     #   packages = with pkgs; [
     #     uv
@@ -82,25 +70,6 @@
     #       diagnosticMode = "workspace";
     #     };
     #   };
-
-    #   tasks = [
-    #     {
-    #       label = "Run Python file";
-    #       command = "uv";
-    #       args = [
-    #         "run"
-    #         "\${GRAM_FILE}"
-    #       ];
-    #     }
-    #   ];
-    #   debugger = [
-    #     {
-    #       label = "Debug Python program";
-    #       adapter = "Debugpy";
-    #       program = "$GRAM_WORKTREE_ROOT/$GRAM_FILE";
-    #       request = "launch";
-    #     }
-    #   ];
     # };
 
     # rust = {
@@ -109,32 +78,6 @@
     #   ];
 
     #   lsp = "rust-analyzer";
-    #   tasks = [
-    #     {
-    #       label = "Run Rust project";
-    #       command = "cargo";
-    #       args = [ "run" ];
-    #     }
-    #     {
-    #       label = "Test Rust project";
-    #       command = "cargo";
-    #       args = [ "test" ];
-    #     }
-    #   ];
-
-    #   debugger = [
-    #     {
-    #       label = "Build and debug Rust";
-    #       adapter = "CodeLLDB";
-    #       build = {
-    #         command = "cargo";
-    #         args = [ "build" ];
-    #       };
-    #       program = "$GRAM_WORKTREE_ROOT/target/debug/<your-binary>";
-    #       sourceLanguages = [ "rust" ];
-    #       request = "launch";
-    #     }
-    #   ];
     # };
 
     # go = {
@@ -144,24 +87,6 @@
     #   ];
 
     #   lsp = "gopls";
-    #   tasks = [
-    #     {
-    #       label = "Run Go project";
-    #       command = "go";
-    #       args = [
-    #         "run"
-    #         "."
-    #       ];
-    #     }
-    #     {
-    #       label = "Test Go project";
-    #       command = "go";
-    #       args = [
-    #         "test"
-    #         "./..."
-    #       ];
-    #     }
-    #   ];
     # };
 
     # typescript = {
@@ -172,16 +97,6 @@
     #   ];
 
     #   lsp = "vtsls";
-    #   tasks = [
-    #     {
-    #       label = "Run TypeScript file";
-    #       command = "bun";
-    #       args = [
-    #         "run"
-    #         "\${GRAM_FILE}"
-    #       ];
-    #     }
-    #   ];
     # };
 
     # html = {

@@ -44,6 +44,7 @@
         la = "eza -a --icons --group-directories-first";
         tree = "eza --tree --icons";
         cat = "bat";
+        diff = "difft";
 
         # Search
         grep = "rg --color=auto";

@@ -18,14 +18,6 @@ let
       };
     }) (builtins.filter (language: language ? lsp) (builtins.attrValues languages))
   );
-
-  tasks = builtins.concatLists (
-    builtins.map (language: language.tasks or [ ]) (builtins.attrValues languages)
-  );
-
-  debugger = builtins.concatLists (
-    builtins.map (language: language.debugger or [ ]) (builtins.attrValues languages)
-  );
 in
 {
   programs.gram = {
@@ -139,9 +131,5 @@ in
         bindings.f2 = "task::Spawn";
       }
     ];
-
-    tasks = tasks;
-
-    debugger = debugger;
   };
 }

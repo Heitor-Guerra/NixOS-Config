@@ -4,39 +4,23 @@ let
   vars = import ../profile-vars.nix { inherit pkgs; };
   languages = vars.languages;
 
-  languageServers = builtins.foldl' (
-    servers: language:
-    if !(language ? lsp) || builtins.hasAttr language.lsp servers then
-      servers
-    else
-      servers
-      // {
-        "${language.lsp}" = {
-          command = language.command or language.lsp;
-          args = language.arguments or [ ];
-        }
-        // lib.optionalAttrs (language ? settings) {
-          config = language.settings;
-        };
-      }
-  ) { } (builtins.attrValues languages);
+  languageServers = builtins.listToAttrs (
+    builtins.map (language: {
+      name = language.lsp;
+      value = {
+        command = language.command or language.lsp;
+        args = language.arguments or [ ];
+        config = language.settings or { };
+      };
+    }) (builtins.filter (language: language ? lsp) (builtins.attrValues languages))
+  );
 
   # Generate Helix language definitions.
-  helixLanguages = lib.mapAttrsToList (
-    name: language:
-    {
-      name = language.helixName or name;
-    }
-    // lib.optionalAttrs (language ? lsp) {
-      language-servers = [ language.lsp ];
-    }
-    // lib.optionalAttrs (language ? helixFormatter) {
-      formatter = language.helixFormatter;
-    }
-    // lib.optionalAttrs (language ? helixDebugger) {
-      debugger = language.helixDebugger;
-    }
-  ) languages;
+  helixLanguages = lib.mapAttrsToList (name: language: {
+    name = name;
+    auto-format = true;
+    language-servers = [ language.lsp ];
+  }) languages;
 
 in
 {

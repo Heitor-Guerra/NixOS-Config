@@ -29,6 +29,7 @@ in
       kdePackages.breeze
       firefox
       _7zz
+      steam
 
       fd
       dust
