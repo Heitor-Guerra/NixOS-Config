@@ -30,6 +30,44 @@
       ];
     };
 
+    c = {
+      packages = with pkgs; [
+        clang
+        clang-tools
+        cmake
+      ];
+
+      lsp = "clangd";
+      # Possible to add arguments to call the lsp
+      arguments = [
+        "--query-driver=/etc/profiles/per-user/heitor-guerra/bin/clang++"
+        "--background-index"
+        "--clang-tidy"
+      ];
+
+      tasks = [
+        {
+          label = "Compile C/C++ file";
+          command = "clang";
+          args = [
+            "-g"
+            "\${GRAM_FILE}"
+            "-o"
+            "\${GRAM_DIR}/program"
+          ];
+        }
+      ];
+
+      debugger = [
+        {
+          label = "Debug C program";
+          adapter = "CodeLLDB";
+          program = "$GRAM_WORKTREE_ROOT/program";
+          request = "launch";
+        }
+      ];
+    };
+
     # python = {
     #   packages = with pkgs; [
     #     uv
@@ -60,44 +98,6 @@
     #       label = "Debug Python program";
     #       adapter = "Debugpy";
     #       program = "$GRAM_WORKTREE_ROOT/$GRAM_FILE";
-    #       request = "launch";
-    #     }
-    #   ];
-    # };
-
-    # c = {
-    #   packages = with pkgs; [
-    #     clang
-    #     clang-tools
-    #     cmake
-    #   ];
-
-    #   lsp = "clangd";
-    #   # Possible to add arguments to call the lsp
-    #   arguments = [
-    #     "--query-driver=/etc/profiles/per-user/heitor-guerra/bin/clang++"
-    #     "--background-index"
-    #     "--clang-tidy"
-    #   ];
-
-    #   tasks = [
-    #     {
-    #       label = "Compile C/C++ file";
-    #       command = "clang";
-    #       args = [
-    #         "-g"
-    #         "\${GRAM_FILE}"
-    #         "-o"
-    #         "\${GRAM_DIR}/program"
-    #       ];
-    #     }
-    #   ];
-
-    #   debugger = [
-    #     {
-    #       label = "Debug C program";
-    #       adapter = "CodeLLDB";
-    #       program = "$GRAM_WORKTREE_ROOT/program";
     #       request = "launch";
     #     }
     #   ];
