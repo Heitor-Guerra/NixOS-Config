@@ -77,6 +77,16 @@ in
 
         clipboard-provider = "wayland";
 
+        auto-format = true;
+        auto-save = {
+          after-delay = {
+            enable = true;
+            timeout = 3000;
+          };
+
+          focus-lost = true;
+        };
+
         # Preserve the usual right/bottom split behavior.
         # Helix already opens horizontal and vertical splits this way.
         soft-wrap = {

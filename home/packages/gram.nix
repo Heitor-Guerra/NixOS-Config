@@ -57,9 +57,10 @@ in
       };
 
       search.button = false;
-      tab_size = 2;
+      tab_size = 4;
       smooth_scroll.enabled = true;
       autosave = "on_window_change";
+      format_on_save = "on";
       ui_font_weight = 300.0;
       buffer_font_weight = 300.0;
       buffer_font_family = "JetBrainsMono Nerd Font";
