@@ -1,11 +1,13 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 let
   vars = import ./profile-vars.nix { inherit pkgs; };
   languages = vars.languages;
 
-  languagePackages = builtins.concatLists (
-    builtins.map (language: language.packages or [ ]) (builtins.attrValues languages)
+  languagePackages = lib.unique (
+    builtins.concatLists (
+      builtins.map (language: language.packages or [ ]) (builtins.attrValues languages)
+    )
   );
 in
 {

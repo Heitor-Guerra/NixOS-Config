@@ -27,7 +27,6 @@
       packages = with pkgs; [
         clang
         clang-tools
-        cmake
       ];
 
       lsp = "clangd";
@@ -39,7 +38,6 @@
       ];
     };
 
-    
     cpp = {
       packages = with pkgs; [
         clang
@@ -55,7 +53,52 @@
         "--clang-tidy"
       ];
     };
-    
+
+    cmake = {
+      packages = with pkgs; [
+        cmake
+        gnumake
+        conan
+        neocmakelsp
+      ];
+
+      lsp = "neocmakelsp";
+      # Possible to add arguments to call the lsp
+      arguments = [ "stdio" ];
+
+      settings = {
+        format.enable = true;
+        lint.enable = true;
+      };
+    };
+
+    dockerfile = {
+      packages = with pkgs; [
+        docker-language-server
+      ];
+
+      lsp = "docker-language-server";
+      # Possible to add arguments to call the lsp
+      arguments = [
+        "start"
+        "--stdio"
+      ];
+
+      settings = {
+        telemetry = "off";
+      };
+    };
+
+    yaml = {
+      packages = with pkgs; [
+        yaml-language-server
+      ];
+
+      lsp = "yaml-language-server";
+
+      arguments = [ "--stdio" ];
+    };
+
     # python = {
     #   packages = with pkgs; [
     #     uv
