@@ -53,18 +53,6 @@
       ];
     };
 
-    cmake = {
-      packages = with pkgs; [
-        cmake
-        gnumake
-        neocmakelsp
-      ];
-
-      lsp = "neocmakelsp";
-      # Possible to add arguments to call the lsp
-      arguments = [ "stdio" ];
-    };
-
     # python = {
     #   packages = with pkgs; [
     #     uv
@@ -153,6 +141,18 @@
     #   };
     # };
 
+    # cmake = {
+    #   packages = with pkgs; [
+    #     cmake
+    #     gnumake
+    #     neocmakelsp
+    #   ];
+
+    #   lsp = "neocmakelsp";
+    #   # Possible to add arguments to call the lsp
+    #   arguments = [ "stdio" ];
+    # };
+
     # yaml = {
     #   packages = with pkgs; [
     #     yaml-language-server
@@ -162,7 +162,6 @@
 
     #   arguments = [ "--stdio" ];
     # };
-
 
     # In Gram, some languages need their extension to work. Access: (https://wiki.nixos.org/wiki/Gram#Temp_FHS_Environment). For exemple:
     # java = {
