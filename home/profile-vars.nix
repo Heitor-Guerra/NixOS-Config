@@ -42,7 +42,6 @@
       packages = with pkgs; [
         clang
         clang-tools
-        cmake
       ];
 
       lsp = "clangd";
@@ -58,45 +57,12 @@
       packages = with pkgs; [
         cmake
         gnumake
-        conan
         neocmakelsp
       ];
 
       lsp = "neocmakelsp";
       # Possible to add arguments to call the lsp
       arguments = [ "stdio" ];
-
-      settings = {
-        format.enable = true;
-        lint.enable = true;
-      };
-    };
-
-    dockerfile = {
-      packages = with pkgs; [
-        docker-language-server
-      ];
-
-      lsp = "docker-language-server";
-      # Possible to add arguments to call the lsp
-      arguments = [
-        "start"
-        "--stdio"
-      ];
-
-      settings = {
-        telemetry = "off";
-      };
-    };
-
-    yaml = {
-      packages = with pkgs; [
-        yaml-language-server
-      ];
-
-      lsp = "yaml-language-server";
-
-      arguments = [ "--stdio" ];
     };
 
     # python = {
@@ -170,7 +136,35 @@
     #   lsp = "json-language-server";
     # };
 
-    # Other languages need their extension to work. Access: (https://wiki.nixos.org/wiki/Gram#Temp_FHS_Environment). For exemple:
+    # dockerfile = {
+    #   packages = with pkgs; [
+    #     docker-language-server
+    #   ];
+
+    #   lsp = "docker-language-server";
+    #   # Possible to add arguments to call the lsp
+    #   arguments = [
+    #     "start"
+    #     "--stdio"
+    #   ];
+
+    #   settings = {
+    #     telemetry = "off";
+    #   };
+    # };
+
+    # yaml = {
+    #   packages = with pkgs; [
+    #     yaml-language-server
+    #   ];
+
+    #   lsp = "yaml-language-server";
+
+    #   arguments = [ "--stdio" ];
+    # };
+
+
+    # In Gram, some languages need their extension to work. Access: (https://wiki.nixos.org/wiki/Gram#Temp_FHS_Environment). For exemple:
     # java = {
     #   packages = with pkgs; [
     #     jdk
