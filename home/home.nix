@@ -15,12 +15,11 @@ in
   imports = [
     ./packages/fastfetch.nix
     ./packages/foot.nix
+    ./packages/git.nix
     ./packages/gram.nix
     ./packages/helix.nix
     ./packages/yazi.nix
     ./packages/zsh.nix
-    ./packages/git.nix
-    ./packages/zellij.nix
     ./niri/niri.nix
   ];
 
