@@ -3,6 +3,7 @@
 {
   imports = [
     ./modules/bootloader.nix
+    ./modules/default-packages.nix
     ./modules/kernel.nix
     ./modules/locale.nix
     ./modules/networking.nix
