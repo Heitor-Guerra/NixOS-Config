@@ -2,6 +2,9 @@
 
 {
   environment.systemPackages = with pkgs; [
-    pkg-config
+    # pkg-config
+    # gnumake
+    # gcc
+    # cmake
   ];
 }
