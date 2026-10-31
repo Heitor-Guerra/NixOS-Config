@@ -20,6 +20,7 @@ in
     ./packages/yazi.nix
     ./packages/zsh.nix
     ./packages/git.nix
+    ./packages/zellij.nix
     ./niri/niri.nix
   ];
 
