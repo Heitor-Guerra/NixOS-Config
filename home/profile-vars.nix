@@ -16,7 +16,8 @@
     lua = {
       packages = with pkgs; [
         lua
-        lux-cli
+        luarocks
+        # lux-cli
         lua-language-server
       ];
 
