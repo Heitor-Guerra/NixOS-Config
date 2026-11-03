@@ -27,7 +27,7 @@
           radius = 13;
           border_width = 1;
           capsule = true;
-          capsule_fill = "surface_variant";
+          capsule_fill = "surface_container";
           capsule_opacity = 0.9;
 
           start = [

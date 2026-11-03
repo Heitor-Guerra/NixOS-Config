@@ -35,7 +35,6 @@
       full-border = {
         package = pkgs.yaziPlugins.full-border;
         setup = true;
-        settings.type = lib.mkLuaInline "ui.Border.ROUNDED";
       };
 
       yatline = {
