@@ -24,35 +24,35 @@
       lsp = "lua-language-server";
     };
 
-    # c = {
-    #   packages = with pkgs; [
-    #     clang
-    #     clang-tools
-    #   ];
+    c = {
+      packages = with pkgs; [
+        clang
+        clang-tools
+      ];
 
-    #   lsp = "clangd";
-    #   # Possible to add arguments to call the lsp
-    #   arguments = [
-    #     "--query-driver=/etc/profiles/per-user/heitor-guerra/bin/clang++"
-    #     "--background-index"
-    #     "--clang-tidy"
-    #   ];
-    # };
+      lsp = "clangd";
+      # Possible to add arguments to call the lsp
+      arguments = [
+        "--query-driver=/etc/profiles/per-user/heitor-guerra/bin/clang++"
+        "--background-index"
+        "--clang-tidy"
+      ];
+    };
 
-    # cpp = {
-    #   packages = with pkgs; [
-    #     clang
-    #     clang-tools
-    #   ];
+    cpp = {
+      packages = with pkgs; [
+        clang
+        clang-tools
+      ];
 
-    #   lsp = "clangd";
-    #   # Possible to add arguments to call the lsp
-    #   arguments = [
-    #     "--query-driver=/etc/profiles/per-user/heitor-guerra/bin/clang++"
-    #     "--background-index"
-    #     "--clang-tidy"
-    #   ];
-    # };
+      lsp = "clangd";
+      # Possible to add arguments to call the lsp
+      arguments = [
+        "--query-driver=/etc/profiles/per-user/heitor-guerra/bin/clang++"
+        "--background-index"
+        "--clang-tidy"
+      ];
+    };
 
     # python = {
     #   packages = with pkgs; [
