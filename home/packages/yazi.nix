@@ -38,14 +38,7 @@
       };
 
       yatline = {
-        package = pkgs.yaziPlugins.yatline.overrideAttrs (old: {
-          postPatch = (old.postPatch or "") + ''
-                      substituteInPlace main.lua \
-                      --replace-fail 'cwd.is_search' 'cwd.spec.is_search' \
-                      --replace-fail 'cwd.domain' 'cwd.spec.domain' \
-                	    --replace-fail 'hovered:icon().text' 'th.icon:match(hovered).text'
-            	  '';
-        });
+        package = pkgs.yaziPlugins.yatline;
         setup = true;
 
         settings = {
