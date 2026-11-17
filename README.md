@@ -17,7 +17,7 @@ The repository is organized modularly to keep system definitions clean and maint
   + **`home.nix`**: Acts as the user orchestrator for the dotfiles and user-level packages. 
   + **`packages/`**: Defines dotfiles for packages, using nix language.
   + **`niri/`**: Defines niri and Noctalia configuration.
-- **`disko/`**: Configuration for filesystem layouts and disk partitioning. Can .
+- **`disko/`**: Configuration for filesystem layouts and disk partitioning.
 - **`installer/`**: Configuration for the live installer environment and its installation workflow
 
 ---
